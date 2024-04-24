@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}!{% endblock %}
+{% block body %}
+
+
+  <header class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-lg-1 py-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 mb-3">Visita más de 500 destinos playeros</h1>
+        <p class="col-lg-10 fs-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. A vero molestiae ipsa aperiam odio voluptatibus iusto cumque dolor facilis est?</p>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-5  justify-content-center">
+       {% if form is defined %}
+            {{form_start(form, {'attr': {'class': 'p-4 p-md-5 border rounded-3 bg-light'}}) }}
+                <span class="fs-4">Para más información</span>
+                <div class="form-floating my-3">
+                    {{form_widget(form.email, {attr: {'placeholder': 'example@gmail.com', 'class': 'form-control', 'id': "floatingEmail"}}) }}
+                    {{form_label(form.email, 'Correo',  {attr: {'for': 'floatingEmail'}})}}
+                </div>
+                <div class="form-floating mb-3">
+                    {{form_widget(form.phone, {attr: {'placeholder': '10 dígitos', 'class': 'form-control', 'id': "floatingPhone"}}) }}
+                    {{form_label(form.phone, 'Teléfono',  {attr: {'for': 'floatingPhone'}})}}
+                    <small class="text-muted">Número de 10 dígitos</small>
+                </div>
+                {{form_widget(form.submit, {attr: {'class': 'w-100 btn btn-lg btn-primary', 'value': 'Guardar'}}) }}
+                <hr class="my-4">
+                <small class="text-muted">Al mandar la información, está de acuerdo en recibir correos y llamadas.</small>
+            {{form_end(form)}}
+            {% elseif registeredUser is defined %}
+                <div class="card rounded-3 bg-light" style="width: 27rem;">
+                    <img class="card-img-top" src="{{asset('img/playa2.png')}}" alt="Imagen de la playa">
+                    <div class="card-body">
+                        <h5 class="card-title">Felicidades! te ganaste un premio vacaional</h5>
+                        <p class="card-text">en breve recibiras un correo a {{registeredUser.email}} y una llamada al número {{registeredUser.phone}}</p>
+                    </div>
+                </div>
+            {% endif %}
+      </div>
+    </div>
+  </header>
+
+    <section class="testimonial text-secondary mt-5 p-5 bg-light">
+        <div class="container">
+            <p class="display-6 text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga ullam, sit cupiditate sint earum distinctio libero deleniti at facilis praesentium?
+            </p>
+        </div>
+    </section>
+
+    <section class='py-5'>
+        <div class="container">
+            <div class="row g-5 py-5">
+            {% for destiny in destinies %}
+                <div class="col-md-4">
+                    <h5 class="fw-bold">{{destiny.name}}</h5>
+                    <p class="text-muted">{{destiny.description}}</p>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %} 
